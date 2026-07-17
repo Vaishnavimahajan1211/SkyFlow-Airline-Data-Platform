@@ -2,7 +2,7 @@
 
 USE skyflow_db;
 
-CREATE TABLE Airport (
+CREATE TABLE airport (
     airport_id INT AUTO_INCREMENT PRIMARY KEY,
     airport_code CHAR(3) NOT NULL UNIQUE,
     airport_name VARCHAR(100) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE Airport (
 select* from Airport; 
 
 
-CREATE TABLE Aircraft (
+CREATE TABLE aircraft (
     aircraft_id INT AUTO_INCREMENT PRIMARY KEY,
     aircraft_code VARCHAR(20) NOT NULL UNIQUE,
     manufacturer VARCHAR(50) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Aircraft (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Passenger (
+CREATE TABLE passenger (
     passenger_id INT AUTO_INCREMENT PRIMARY KEY,
     passenger_code VARCHAR(20) NOT NULL UNIQUE,
     first_name VARCHAR(50) NOT NULL,
