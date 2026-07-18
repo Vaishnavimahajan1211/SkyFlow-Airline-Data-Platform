@@ -1,0 +1,51 @@
+airport_code,airport_name,city,country,timezone
+DEL,Indira Gandhi International Airport,Delhi,India,Asia/Kolkata
+BOM,Chhatrapati Shivaji Maharaj International Airport,Mumbai,India,Asia/Kolkata
+BLR,Kempegowda International Airport,Bengaluru,India,Asia/Kolkata
+MAA,Chennai International Airport,Chennai,India,Asia/Kolkata
+CCU,Netaji Subhas Chandra Bose International Airport,Kolkata,India,Asia/Kolkata
+HYD,Rajiv Gandhi International Airport,Hyderabad,India,Asia/Kolkata
+AMD,Sardar Vallabhbhai Patel International Airport,Ahmedabad,India,Asia/Kolkata
+COK,Cochin International Airport,Kochi,India,Asia/Kolkata
+GOI,Goa International Airport,Goa,India,Asia/Kolkata
+PNQ,Pune International Airport,Pune,India,Asia/Kolkata
+JFK,John F. Kennedy International Airport,New York,USA,America/New_York
+LAX,Los Angeles International Airport,Los Angeles,USA,America/Los_Angeles
+ORD,O'Hare International Airport,Chicago,USA,America/Chicago
+ATL,Hartsfield-Jackson Atlanta International Airport,Atlanta,USA,America/New_York
+DFW,Dallas/Fort Worth International Airport,Dallas,USA,America/Chicago
+SFO,San Francisco International Airport,San Francisco,USA,America/Los_Angeles
+SEA,Seattle-Tacoma International Airport,Seattle,USA,America/Los_Angeles
+MIA,Miami International Airport,Miami,USA,America/New_York
+LAS,Harry Reid International Airport,Las Vegas,USA,America/Los_Angeles
+BOS,Logan International Airport,Boston,USA,America/New_York
+LHR,Heathrow Airport,London,United Kingdom,Europe/London
+LGW,Gatwick Airport,London,United Kingdom,Europe/London
+MAN,Manchester Airport,Manchester,United Kingdom,Europe/London
+EDI,Edinburgh Airport,Edinburgh,United Kingdom,Europe/London
+BHX,Birmingham Airport,Birmingham,United Kingdom,Europe/London
+DXB,Dubai International Airport,Dubai,UAE,Asia/Dubai
+DWC,Al Maktoum International Airport,Dubai,UAE,Asia/Dubai
+AUH,Zayed International Airport,Abu Dhabi,UAE,Asia/Dubai
+SHJ,Sharjah International Airport,Sharjah,UAE,Asia/Dubai
+RKT,Ras Al Khaimah International Airport,Ras Al Khaimah,UAE,Asia/Dubai
+FRA,Frankfurt Airport,Frankfurt,Germany,Europe/Berlin
+MUC,Munich Airport,Munich,Germany,Europe/Berlin
+BER,Berlin Brandenburg Airport,Berlin,Germany,Europe/Berlin
+HAM,Hamburg Airport,Hamburg,Germany,Europe/Berlin
+CDG,Charles de Gaulle Airport,Paris,France,Europe/Paris
+ORY,Paris Orly Airport,Paris,France,Europe/Paris
+NCE,Nice Côte d'Azur Airport,Nice,France,Europe/Paris
+LYS,Lyon-Saint Exupéry Airport,Lyon,France,Europe/Paris
+HND,Haneda Airport,Tokyo,Japan,Asia/Tokyo
+NRT,Narita International Airport,Tokyo,Japan,Asia/Tokyo
+KIX,Kansai International Airport,Osaka,Japan,Asia/Tokyo
+CTS,New Chitose Airport,Sapporo,Japan,Asia/Tokyo
+SIN,Singapore Changi Airport,Singapore,Singapore,Asia/Singapore
+XSP,Seletar Airport,Singapore,Singapore,Asia/Singapore
+SYD,Sydney Kingsford Smith Airport,Sydney,Australia,Australia/Sydney
+MEL,Melbourne Airport,Melbourne,Australia,Australia/Melbourne
+BNE,Brisbane Airport,Brisbane,Australia,Australia/Brisbane
+YYZ,Toronto Pearson International Airport,Toronto,Canada,America/Toronto
+YVR,Vancouver International Airport,Vancouver,Canada,America/Vancouver
+YUL,Montréal–Trudeau International Airport,Montreal,Canada,America/Toronto
