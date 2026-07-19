@@ -9,13 +9,17 @@ import pandas as pd
 from python.config.config import RAW_FOLDER
 
 
+ROUTE_TYPES = [
+    "Domestic",
+    "International"
+]
+
+
 def generate_routes():
 
-    airport_file = RAW_FOLDER / "airport.csv"
+    airport_df = pd.read_csv(RAW_FOLDER / "airport.csv")
 
-    airport_df = pd.read_csv(airport_file)
-
-    airport_codes = airport_df["airport_code"].tolist()
+    airports = airport_df.to_dict("records")
 
     routes = []
 
@@ -25,28 +29,56 @@ def generate_routes():
 
     while len(routes) < 100:
 
-        source = random.choice(airport_codes)
-        destination = random.choice(airport_codes)
+        source = random.choice(airports)
+        destination = random.choice(airports)
 
-        if source == destination:
+        if source["airport_code"] == destination["airport_code"]:
             continue
 
-        if (source, destination) in used_routes:
+        route_key = (
+            source["airport_code"],
+            destination["airport_code"]
+        )
+
+        if route_key in used_routes:
             continue
 
-        used_routes.add((source, destination))
+        used_routes.add(route_key)
 
-        distance = random.randint(300, 12000)
+        if source["country"] == destination["country"]:
 
-        duration = int(distance / 8)
+            route_type = "Domestic"
+
+            distance = random.randint(300, 2500)
+
+        else:
+
+            route_type = "International"
+
+            distance = random.randint(2501, 12000)
+
+        duration_minutes = random.randint(
+            int(distance / 10),
+            int(distance / 7)
+        )
+
+        fuel_estimate_liters = round(distance * 4.8, 2)
 
         routes.append({
 
             "route_id": f"RT{route_id:04}",
-            "source_airport": source,
-            "destination_airport": destination,
+
+            "source_airport": source["airport_code"],
+
+            "destination_airport": destination["airport_code"],
+
+            "route_type": route_type,
+
             "distance_km": distance,
-            "duration_minutes": duration
+
+            "duration_minutes": duration_minutes,
+
+            "fuel_estimate_liters": fuel_estimate_liters
 
         })
 
