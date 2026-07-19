@@ -44,6 +44,50 @@ def generate_bookings():
             days=random.randint(1, 120)
         )
 
+        seat_class = random.choices(
+            SEAT_CLASSES,
+            weights=[70, 10, 15, 5],
+            k=1
+        )[0]
+
+        booking_status = random.choices(
+            BOOKING_STATUS,
+            weights=[85, 5, 10],
+            k=1
+        )[0]
+
+        # Ticket Price based on Seat Class
+        if seat_class == "Economy":
+            ticket_price = random.randint(3000, 8000)
+
+        elif seat_class == "Premium Economy":
+            ticket_price = random.randint(8001, 12000)
+
+        elif seat_class == "Business":
+            ticket_price = random.randint(12001, 25000)
+
+        else:
+            ticket_price = random.randint(25001, 40000)
+
+        # Financial Details
+        tax = round(ticket_price * 0.18, 2)
+
+        discount = random.choice([
+            0,
+            500,
+            1000,
+            1500,
+            2000
+        ])
+
+        final_amount = ticket_price + tax - discount
+
+        payment_status = random.choices(
+            ["Paid", "Pending", "Refunded"],
+            weights=[90, 8, 2],
+            k=1
+        )[0]
+
         bookings.append({
 
             "booking_id": f"BK{i:05}",
@@ -54,17 +98,19 @@ def generate_bookings():
 
             "booking_date": booking_date.strftime("%Y-%m-%d %H:%M:%S"),
 
-            "seat_class": random.choices(
-                SEAT_CLASSES,
-                weights=[70, 10, 15, 5],
-                k=1
-            )[0],
+            "seat_class": seat_class,
 
-            "booking_status": random.choices(
-                BOOKING_STATUS,
-                weights=[85, 5, 10],
-                k=1
-            )[0]
+            "booking_status": booking_status,
+
+            "ticket_price": ticket_price,
+
+            "tax": tax,
+
+            "discount": discount,
+
+            "final_amount": final_amount,
+
+            "payment_status": payment_status
 
         })
 

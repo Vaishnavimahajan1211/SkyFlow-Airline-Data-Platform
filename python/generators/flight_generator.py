@@ -10,10 +10,25 @@ from datetime import datetime, timedelta
 from python.config.config import RAW_FOLDER
 
 
-STATUS = [
+FLIGHT_STATUS = [
     "Scheduled",
+    "Boarding",
+    "Departed",
     "Delayed",
-    "Cancelled"
+    "Cancelled",
+    "Landed"
+]
+
+TERMINALS = [
+    "T1",
+    "T2",
+    "T3"
+]
+
+GATES = [
+    "A01","A02","A03","A04","A05",
+    "B01","B02","B03","B04","B05",
+    "C01","C02","C03","C04","C05"
 ]
 
 
@@ -38,6 +53,26 @@ def generate_flights():
             minutes=random.randint(0, 59)
         )
 
+        status = random.choices(
+            FLIGHT_STATUS,
+            weights=[45, 10, 15, 15, 5, 10],
+            k=1
+        )[0]
+
+        delay_minutes = 0
+
+        if status == "Delayed":
+            delay_minutes = random.choice([
+                15,
+                30,
+                45,
+                60,
+                90,
+                120
+            ])
+
+        departure = departure + timedelta(minutes=delay_minutes)
+
         arrival = departure + timedelta(
             minutes=int(route["duration_minutes"])
         )
@@ -56,11 +91,13 @@ def generate_flights():
 
             "arrival_datetime": arrival.strftime("%Y-%m-%d %H:%M:%S"),
 
-            "status": random.choices(
-                STATUS,
-                weights=[85, 10, 5],
-                k=1
-            )[0]
+            "flight_status": status,
+
+            "terminal": random.choice(TERMINALS),
+
+            "gate_number": random.choice(GATES),
+
+            "delay_minutes": delay_minutes
 
         })
 
