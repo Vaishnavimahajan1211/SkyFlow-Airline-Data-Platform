@@ -20,6 +20,6 @@ GOLD_FOLDER = DATA_FOLDER / "gold"
 MYSQL_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "kumkum@123*",
     "database": "skyflow_db"
 }

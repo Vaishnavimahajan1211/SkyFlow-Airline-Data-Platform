@@ -1,84 +1,68 @@
 USE skyflow_db;
 
 -- =====================================================
--- TABLE: flight
+-- FLIGHT
 -- =====================================================
 
 CREATE TABLE flight (
 
-    flight_id INT AUTO_INCREMENT PRIMARY KEY,
+    flight_id VARCHAR(10) PRIMARY KEY,
 
-    flight_number VARCHAR(20) NOT NULL UNIQUE,
+    flight_number VARCHAR(20) UNIQUE NOT NULL,
 
-    aircraft_id INT NOT NULL,
+    route_id VARCHAR(10) NOT NULL,
 
-    route_id INT NOT NULL,
+    aircraft_id VARCHAR(10) NOT NULL,
 
-    pilot_id INT NOT NULL,
+    departure_datetime DATETIME NOT NULL,
 
-    scheduled_departure DATETIME NOT NULL,
+    arrival_datetime DATETIME NOT NULL,
 
-    actual_departure DATETIME,
+    flight_status VARCHAR(30),
 
-    scheduled_arrival DATETIME NOT NULL,
+    terminal VARCHAR(10),
 
-    actual_arrival DATETIME,
+    gate_number VARCHAR(10),
 
-    flight_status ENUM(
-        'Scheduled',
-        'Boarding',
-        'Departed',
-        'Delayed',
-        'Cancelled',
-        'Arrived'
-    ) DEFAULT 'Scheduled',
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_flight_aircraft
-        FOREIGN KEY (aircraft_id)
-        REFERENCES aircraft(aircraft_id),
+    delay_minutes INT,
 
     CONSTRAINT fk_flight_route
         FOREIGN KEY (route_id)
         REFERENCES route(route_id),
 
-    CONSTRAINT fk_flight_pilot
-        FOREIGN KEY (pilot_id)
-        REFERENCES crew(crew_id)
+    CONSTRAINT fk_flight_aircraft
+        FOREIGN KEY (aircraft_id)
+        REFERENCES aircraft(aircraft_id)
 
 );
-DESCRIBE flight;
 
 -- =====================================================
--- TABLE: booking
+-- BOOKING
 -- =====================================================
 
 CREATE TABLE booking (
 
-    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id VARCHAR(10) PRIMARY KEY,
 
-    booking_reference VARCHAR(20) NOT NULL UNIQUE,
+    passenger_id VARCHAR(10) NOT NULL,
 
-    passenger_id INT NOT NULL,
+    flight_id VARCHAR(10) NOT NULL,
 
-    flight_id INT NOT NULL,
+    booking_date DATETIME,
 
-    booking_date DATETIME NOT NULL,
+    seat_class VARCHAR(30),
 
-    travel_class ENUM('Economy','Premium Economy','Business','First') NOT NULL,
+    booking_status VARCHAR(30),
 
-    seat_number VARCHAR(10),
+    ticket_price DECIMAL(10,2),
 
-    ticket_price DECIMAL(10,2) NOT NULL,
+    tax DECIMAL(10,2),
 
-    booking_status ENUM(
-        'Confirmed',
-        'Cancelled',
-        'Pending'
-    ) DEFAULT 'Confirmed',
+    discount DECIMAL(10,2),
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    final_amount DECIMAL(10,2),
+
+    payment_status VARCHAR(30),
 
     CONSTRAINT fk_booking_passenger
         FOREIGN KEY (passenger_id)
@@ -89,134 +73,31 @@ CREATE TABLE booking (
         REFERENCES flight(flight_id)
 
 );
--- =====================================================
--- TABLE: payment
--- =====================================================
+
+USE skyflow_db;
 
 CREATE TABLE payment (
 
-    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    payment_id VARCHAR(10) PRIMARY KEY,
 
-    booking_id INT NOT NULL,
-
-    payment_method ENUM(
-        'Credit Card',
-        'Debit Card',
-        'UPI',
-        'Net Banking',
-        'Wallet'
-    ),
-
-    transaction_id VARCHAR(100) UNIQUE,
-
-    amount DECIMAL(10,2) NOT NULL,
+    booking_id VARCHAR(10) NOT NULL,
 
     payment_date DATETIME,
 
-    payment_status ENUM(
-        'Success',
-        'Failed',
-        'Refunded'
-    ) DEFAULT 'Success',
+    payment_method VARCHAR(30),
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_status VARCHAR(20),
 
-    CONSTRAINT fk_payment_booking
-        FOREIGN KEY (booking_id)
+    amount DECIMAL(10,2),
+
+    transaction_id VARCHAR(50),
+
+    FOREIGN KEY (booking_id)
         REFERENCES booking(booking_id)
 
 );
-describe flight;
 
--- =====================================================
--- TABLE: baggage
--- =====================================================
+ALTER TABLE payment
+DROP COLUMN transaction_id;
 
-CREATE TABLE baggage (
-
-    baggage_id INT AUTO_INCREMENT PRIMARY KEY,
-
-    booking_id INT NOT NULL,
-
-    baggage_tag VARCHAR(30) UNIQUE,
-
-    baggage_weight DECIMAL(5,2),
-
-    baggage_type ENUM(
-        'Cabin',
-        'Check-in'
-    ),
-
-    baggage_status ENUM(
-        'Checked-In',
-        'Loaded',
-        'In Transit',
-        'Delivered',
-        'Lost'
-    ) DEFAULT 'Checked-In',
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_baggage_booking
-        FOREIGN KEY (booking_id)
-        REFERENCES booking(booking_id)
-
-);
 show tables;
-
--- =====================================================
--- TABLE: weather
--- =====================================================
-
-CREATE TABLE weather (
-
-    weather_id INT AUTO_INCREMENT PRIMARY KEY,
-
-    airport_id INT NOT NULL,
-
-    observation_time DATETIME NOT NULL,
-
-    temperature DECIMAL(5,2),
-
-    humidity DECIMAL(5,2),
-
-    wind_speed DECIMAL(5,2),
-
-    weather_condition VARCHAR(50),
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_weather_airport
-        FOREIGN KEY (airport_id)
-        REFERENCES airport(airport_id)
-
-);
-
--- =====================================================
--- TABLE: flight_status
--- =====================================================
-
-CREATE TABLE flight_status (
-
-    status_id INT AUTO_INCREMENT PRIMARY KEY,
-
-    flight_id INT NOT NULL,
-
-    status ENUM(
-        'Scheduled',
-        'Boarding',
-        'Departed',
-        'Delayed',
-        'Cancelled',
-        'Arrived'
-    ) NOT NULL,
-
-    updated_at DATETIME NOT NULL,
-
-    remarks VARCHAR(255),
-
-    CONSTRAINT fk_status_flight
-        FOREIGN KEY (flight_id)
-        REFERENCES flight(flight_id)
-
-);
