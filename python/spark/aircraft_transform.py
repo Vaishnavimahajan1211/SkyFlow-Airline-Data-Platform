@@ -5,7 +5,7 @@ Aircraft Transformation using PySpark
 from pyspark.sql.functions import upper, trim, col
 
 from python.spark.spark_session import get_spark
-from python.config.config import BRONZE_FOLDER
+from python.config.config import BRONZE_FOLDER, SILVER_FOLDER
 
 spark = get_spark()
 
@@ -57,5 +57,12 @@ print("\n========== TRANSFORMED AIRCRAFT DATA ==========")
 df.show(20, truncate=False)
 
 print("\nTotal Aircraft :", df.count())
+# Write to Silver Layer
+df.write.mode("overwrite") \
+    .option("header", True) \
+    .csv(str(SILVER_FOLDER / "aircraft"))
+
+print("\nAircraft data successfully written to Silver Layer.")
 
 spark.stop()
+
