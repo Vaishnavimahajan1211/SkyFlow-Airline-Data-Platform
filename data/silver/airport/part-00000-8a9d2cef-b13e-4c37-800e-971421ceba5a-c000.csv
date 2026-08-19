@@ -1,0 +1,51 @@
+airport_code,airport_name,city,country,timezone
+AMD,Sardar Vallabhbhai Patel International Airport,Ahmedabad,India,Asia/Kolkata
+ATL,Hartsfield-Jackson Atlanta International Airport,Atlanta,Usa,America/New_York
+AUH,Zayed International Airport,Abu Dhabi,Uae,Asia/Dubai
+BER,Berlin Brandenburg Airport,Berlin,Germany,Europe/Berlin
+BHX,Birmingham Airport,Birmingham,United Kingdom,Europe/London
+BLR,Kempegowda International Airport,Bengaluru,India,Asia/Kolkata
+BNE,Brisbane Airport,Brisbane,Australia,Australia/Brisbane
+BOM,Chhatrapati Shivaji Maharaj International Airport,Mumbai,India,Asia/Kolkata
+BOS,Logan International Airport,Boston,Usa,America/New_York
+CCU,Netaji Subhas Chandra Bose International Airport,Kolkata,India,Asia/Kolkata
+CDG,Charles de Gaulle Airport,Paris,France,Europe/Paris
+COK,Cochin International Airport,Kochi,India,Asia/Kolkata
+CTS,New Chitose Airport,Sapporo,Japan,Asia/Tokyo
+DEL,Indira Gandhi International Airport,Delhi,India,Asia/Kolkata
+DFW,Dallas/Fort Worth International Airport,Dallas,Usa,America/Chicago
+DWC,Al Maktoum International Airport,Dubai,Uae,Asia/Dubai
+DXB,Dubai International Airport,Dubai,Uae,Asia/Dubai
+EDI,Edinburgh Airport,Edinburgh,United Kingdom,Europe/London
+FRA,Frankfurt Airport,Frankfurt,Germany,Europe/Berlin
+GOI,Goa International Airport,Goa,India,Asia/Kolkata
+HAM,Hamburg Airport,Hamburg,Germany,Europe/Berlin
+HND,Haneda Airport,Tokyo,Japan,Asia/Tokyo
+HYD,Rajiv Gandhi International Airport,Hyderabad,India,Asia/Kolkata
+JFK,John F. Kennedy International Airport,New York,Usa,America/New_York
+KIX,Kansai International Airport,Osaka,Japan,Asia/Tokyo
+LAS,Harry Reid International Airport,Las Vegas,Usa,America/Los_Angeles
+LAX,Los Angeles International Airport,Los Angeles,Usa,America/Los_Angeles
+LGW,Gatwick Airport,London,United Kingdom,Europe/London
+LHR,Heathrow Airport,London,United Kingdom,Europe/London
+LYS,Lyon-Saint Exupéry Airport,Lyon,France,Europe/Paris
+MAA,Chennai International Airport,Chennai,India,Asia/Kolkata
+MAN,Manchester Airport,Manchester,United Kingdom,Europe/London
+MEL,Melbourne Airport,Melbourne,Australia,Australia/Melbourne
+MIA,Miami International Airport,Miami,Usa,America/New_York
+MUC,Munich Airport,Munich,Germany,Europe/Berlin
+NCE,Nice Côte d'Azur Airport,Nice,France,Europe/Paris
+NRT,Narita International Airport,Tokyo,Japan,Asia/Tokyo
+ORD,O'Hare International Airport,Chicago,Usa,America/Chicago
+ORY,Paris Orly Airport,Paris,France,Europe/Paris
+PNQ,Pune International Airport,Pune,India,Asia/Kolkata
+RKT,Ras Al Khaimah International Airport,Ras Al Khaimah,Uae,Asia/Dubai
+SEA,Seattle-Tacoma International Airport,Seattle,Usa,America/Los_Angeles
+SFO,San Francisco International Airport,San Francisco,Usa,America/Los_Angeles
+SHJ,Sharjah International Airport,Sharjah,Uae,Asia/Dubai
+SIN,Singapore Changi Airport,Singapore,Singapore,Asia/Singapore
+SYD,Sydney Kingsford Smith Airport,Sydney,Australia,Australia/Sydney
+XSP,Seletar Airport,Singapore,Singapore,Asia/Singapore
+YUL,Montréal–Trudeau International Airport,Montreal,Canada,America/Toronto
+YVR,Vancouver International Airport,Vancouver,Canada,America/Vancouver
+YYZ,Toronto Pearson International Airport,Toronto,Canada,America/Toronto
