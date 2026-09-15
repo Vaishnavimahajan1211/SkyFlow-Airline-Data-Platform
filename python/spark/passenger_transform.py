@@ -1,72 +1,157 @@
 """
 Passenger Transformation using PySpark
+Bronze -> Silver
 """
 
-from pyspark.sql.functions import upper, trim, col, to_date
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, trim, upper, initcap, to_date
 
-from python.spark.spark_session import get_spark
-from python.config.config import BRONZE_FOLDER
+from python.config.config import BRONZE_FOLDER, SILVER_FOLDER
 
-spark = get_spark()
 
-# Read Bronze Layer
-df = spark.read.csv(
-    str(BRONZE_FOLDER / "passenger.csv"),
-    header=True,
-    inferSchema=True
+# =========================
+# SPARK SESSION
+# =========================
+
+spark = (
+    SparkSession.builder
+    .appName("Passenger Silver Transformation")
+    .master("local[*]")
+    .getOrCreate()
 )
+
+spark.sparkContext.setLogLevel("WARN")
+
+
+# =========================
+# READ BRONZE DATA
+# =========================
+
+passenger_df = (
+    spark.read
+    .option("header", True)
+    .option("inferSchema", True)
+    .csv(str(BRONZE_FOLDER / "passenger.csv"))
+)
+
 
 print("\n========== ORIGINAL PASSENGER DATA ==========")
-df.show(10, truncate=False)
 
-# Remove duplicate passengers
-df = df.dropDuplicates(["passenger_id"])
+passenger_df.show(10, truncate=False)
 
-# Remove null passenger IDs
-df = df.dropna(subset=["passenger_id"])
 
-# Trim text columns
-df = (
-    df.withColumn("first_name", trim(col("first_name")))
-      .withColumn("last_name", trim(col("last_name")))
-      .withColumn("gender", trim(col("gender")))
-      .withColumn("email", trim(col("email")))
-      .withColumn("phone", trim(col("phone")))
-      .withColumn("passport_number", trim(col("passport_number")))
-      .withColumn("nationality", trim(col("nationality")))
+# =========================
+# TRANSFORMATION
+# =========================
+
+passenger_silver = (
+    passenger_df
+
+    # Clean passenger ID
+    .withColumn(
+        "passenger_id",
+        upper(trim(col("passenger_id")))
+    )
+
+    # Clean names
+    .withColumn(
+        "first_name",
+        initcap(trim(col("first_name")))
+    )
+    .withColumn(
+        "last_name",
+        initcap(trim(col("last_name")))
+    )
+
+    # Clean gender
+    .withColumn(
+        "gender",
+        initcap(trim(col("gender")))
+    )
+
+    # Convert DOB to date
+    .withColumn(
+        "date_of_birth",
+        to_date(col("date_of_birth"))
+    )
+
+    # Clean email
+    .withColumn(
+        "email",
+        trim(col("email"))
+    )
+
+    # Clean phone
+    .withColumn(
+        "phone",
+        trim(col("phone"))
+    )
+
+    # Clean passport
+    .withColumn(
+        "passport_number",
+        upper(trim(col("passport_number")))
+    )
+
+    # Clean nationality
+    .withColumn(
+        "nationality",
+        initcap(trim(col("nationality")))
+    )
+
+    # Remove duplicate passengers
+    .dropDuplicates(["passenger_id"])
+
+    # Remove records without passenger ID
+    .filter(col("passenger_id").isNotNull())
+
+    # Select required columns
+    .select(
+        "passenger_id",
+        "first_name",
+        "last_name",
+        "gender",
+        "date_of_birth",
+        "email",
+        "phone",
+        "passport_number",
+        "nationality"
+    )
+
+    # Sort by passenger ID
+    .orderBy("passenger_id")
 )
 
-# Standardize values
-df = (
-    df.withColumn("gender", upper(col("gender")))
-      .withColumn("nationality", upper(col("nationality")))
-)
 
-# Convert DOB to Date
-df = df.withColumn(
-    "date_of_birth",
-    to_date(col("date_of_birth"))
-)
-
-# Select required columns
-df = df.select(
-    "passenger_id",
-    "first_name",
-    "last_name",
-    "gender",
-    "date_of_birth",
-    "email",
-    "phone",
-    "passport_number",
-    "nationality"
-)
-
-# Sort records
-df = df.orderBy("passenger_id")
+# =========================
+# SHOW TRANSFORMED DATA
+# =========================
 
 print("\n========== TRANSFORMED PASSENGER DATA ==========")
-df.show(20, truncate=False)
 
-print("\nTotal Passengers :", df.count())
+passenger_silver.show(20, truncate=False)
+
+print(f"\nTotal Passengers : {passenger_silver.count()}")
+
+
+# =========================
+# WRITE TO SILVER
+# =========================
+
+(
+    passenger_silver
+    .write
+    .mode("overwrite")
+    .option("header", True)
+    .csv(str(SILVER_FOLDER / "passenger"))
+)
+
+
+print("\nPassenger data successfully written to Silver Layer.")
+
+
+# =========================
+# STOP SPARK
+# =========================
 
 spark.stop()
