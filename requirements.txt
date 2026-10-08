@@ -1,0 +1,5 @@
+
+pandas
+Faker
+mysql-connector-python
+pyspark
