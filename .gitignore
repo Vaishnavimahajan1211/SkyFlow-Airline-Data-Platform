@@ -17,3 +17,7 @@ Thumbs.db
 
 # Logs
 *.log 
+
+# Spark temporary outputs and logs
+spark_log.txt
+test_spark_output/
