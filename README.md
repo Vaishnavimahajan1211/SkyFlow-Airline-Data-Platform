@@ -61,6 +61,7 @@ The Gold datasets are loaded into Databricks and used to generate five persisted
 These tables support analysis of booking status, confirmed booking revenue, payment amounts, route revenue, and flight delays.
 
 ## Repository Structure
+## Repository Structure
 
 ```text
 SkyFlow-Airline-Data-Platform/
@@ -83,6 +84,7 @@ SkyFlow-Airline-Data-Platform/
 └── sql/
     └── analytics/
 ```
+
 
 ## Project Status
 
