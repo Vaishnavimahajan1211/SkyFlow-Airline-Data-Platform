@@ -23,3 +23,6 @@ test_spark_output/
 
 # Generated Gold data and Spark metadata
 data/gold/
+
+# Generated Silver data and Spark metadata
+data/silver/
