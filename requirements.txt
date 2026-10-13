@@ -4,3 +4,4 @@ Faker
 mysql-connector-python
 pyspark
 python-dotenv
+pytest
