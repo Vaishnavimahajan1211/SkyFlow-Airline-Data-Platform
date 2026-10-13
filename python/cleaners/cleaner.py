@@ -1,3 +1,4 @@
+
 """
 Generic Cleaner
 SkyFlow Enterprise Airline Data Platform
@@ -19,7 +20,9 @@ def clean_dataset(file_name):
     df = df.drop_duplicates()
 
     # Remove leading/trailing spaces from text columns
-    for col in df.select_dtypes(include="object").columns:
+    text_columns = df.select_dtypes(include=["object", "str"]).columns
+
+    for col in text_columns:
         df[col] = df[col].str.strip()
 
     # Replace empty strings with NULL
