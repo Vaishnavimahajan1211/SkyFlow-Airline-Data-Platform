@@ -26,3 +26,6 @@ data/gold/
 
 # Generated Silver data and Spark metadata
 data/silver/
+
+# Generated data quality reports
+data/quality_reports/
