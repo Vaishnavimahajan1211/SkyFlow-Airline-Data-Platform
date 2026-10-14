@@ -29,3 +29,6 @@ data/silver/
 
 # Generated data quality reports
 data/quality_reports/
+
+# Local backup files
+python/quality/data_quality_checks_backup.py
