@@ -4,61 +4,66 @@ An end-to-end data engineering project that transforms airline operational data 
 
 ## Overview
 
-SkyFlow simulates an airline data platform that processes passengers, bookings, flights, airports, aircraft, routes, and payments. It follows a layered data architecture and produces analytical datasets for business reporting and operational insights.
+SkyFlow simulates a modern airline data platform that processes passenger, booking, flight, airport, aircraft, route, and payment data. The platform uses a layered data architecture to transform operational data into structured datasets for business analysis and operational reporting.
 
 ## Architecture
 
 **MySQL → Python ETL → Bronze → Silver → Gold → Databricks → Delta Analytics Tables**
+![SkyFlow Architecture](docs/screenshots/skyflow_architecture.png)
 
 ## Technology Stack
 
-* **Database:** MySQL
-* **Programming:** Python, SQL
-* **Data Processing:** Pandas, Apache Spark, PySpark
-* **Analytics Platform:** Databricks
-* **Storage Formats:** CSV, Delta tables
-* **Version Control:** Git, GitHub
+| Category | Technologies |
+|---|---|
+| Database | MySQL |
+| Programming | Python, SQL |
+| Data Processing | Pandas, Apache Spark, PySpark |
+| Analytics Platform | Databricks |
+| Storage Formats | CSV, Delta Tables |
+| Version Control | Git, GitHub |
 
 ## Key Features
 
-### 1. Data Engineering Pipeline
-
-* Airline-related relational data and Python-based data generation.
-* Bronze, Silver, and Gold data-processing layers.
-* PySpark transformations for dimension and fact datasets.
-* Analytics-ready outputs for downstream business analysis.
+### 1. End-to-End Data Pipeline
+- Airline-related relational data and Python-based data generation.
+- Bronze, Silver, and Gold data-processing layers.
+- PySpark transformations for dimension and fact datasets.
+- Analytics-ready datasets for downstream business analysis.
 
 ### 2. Gold Data Layer
 
-The pipeline generates seven dimension and fact datasets.
+The pipeline generates seven dimension and fact datasets containing **11,400 records**.
 
-| Dataset         |    Records |
-| --------------- | ---------: |
-| `dim_passenger` |      1,000 |
-| `dim_airport`   |         50 |
-| `dim_aircraft`  |         50 |
-| `dim_route`     |        100 |
-| `fact_booking`  |      5,000 |
-| `fact_flight`   |        200 |
-| `fact_payment`  |      5,000 |
-| **Total**       | **11,400** |
+| Dataset | Records |
+|---|---:|
+| `dim_passenger` | 1,000 |
+| `dim_airport` | 50 |
+| `dim_aircraft` | 50 |
+| `dim_route` | 100 |
+| `fact_booking` | 5,000 |
+| `fact_flight` | 200 |
+| `fact_payment` | 5,000 |
+| **Total** | **11,400** |
 
-### 3. Data Quality Validation
+### 3. Data Quality
 
-* 52 validation checks passed in the tested run.
-* Primary-key null and duplicate checks.
-* Foreign-key integrity checks.
-* Booking amount and flight-delay business-rule checks.
+The tested pipeline run completed **52 out of 52 data-quality checks successfully**.
+
+Validation includes:
+- Primary-key null and duplicate checks.
+- Foreign-key integrity checks.
+- Booking amount and flight-delay business-rule checks.
+- CSV-based data-quality reporting.
 
 ### 4. Databricks Analytics
 
 Five persisted Delta analytics tables have been created and verified:
 
-* `workspace.default.skyflow_booking_kpis`
-* `workspace.default.skyflow_flight_kpis`
-* `workspace.default.skyflow_payment_kpis`
-* `workspace.default.skyflow_route_revenue`
-* `workspace.default.skyflow_flight_performance`
+- `workspace.default.skyflow_booking_kpis`
+- `workspace.default.skyflow_flight_kpis`
+- `workspace.default.skyflow_payment_kpis`
+- `workspace.default.skyflow_route_revenue`
+- `workspace.default.skyflow_flight_performance`
 
 These tables support analysis of booking status, confirmed-booking revenue, payment amounts, route revenue, and flight performance.
 
@@ -93,10 +98,10 @@ SkyFlow-Airline-Data-Platform/
 
 ### Prerequisites
 
-* Python
-* MySQL and MySQL Workbench
-* Git
-* A Databricks workspace for the analytics stage
+- Python
+- MySQL and MySQL Workbench
+- Git
+- Databricks workspace for the analytics stage
 
 ### 1. Clone the Repository
 
@@ -113,30 +118,52 @@ python -m pip install -r requirements.txt
 
 ### 3. Configure MySQL
 
-* Create or configure the project database using the SQL scripts in the `sql/` directory.
-* Configure your local database connection settings.
-* Keep passwords and other credentials out of GitHub.
+- Create and configure the project database using the SQL scripts in the `sql/` directory.
+- Set up the local database connection using the project's configuration.
+- Keep credentials in a local `.env` file and never commit passwords or secrets.
 
 ### 4. Run the Pipeline
 
-After configuring the required database connection and project dependencies, run:
+After configuring MySQL and the required dependencies, run:
 
 ```bash
 python -m python.pipeline.master_pipeline
 ```
 
-The pipeline generates the project's data-layer outputs. Generated Gold datasets are intentionally excluded from Git tracking and may need to be regenerated locally.
+The pipeline generates the project's data-layer outputs. Gold datasets and other generated outputs may need to be regenerated locally because generated data is excluded from Git tracking.
 
 ### 5. Run Databricks Analytics
 
-Upload the generated Gold datasets to your Databricks workspace, then run the analytics notebook or SQL workflow used to create the five Delta tables listed above.
+Upload the generated Gold datasets to the Databricks workspace and run the project's analytics notebook or SQL workflow to create and verify the five Delta tables listed above.
+
+## Validation Results
+
+Latest recorded validation results:
+
+- Pipeline steps completed: **8/8**
+- Data-quality checks passed: **52/52**
+- Automated unit tests passed: **17/17**
+- Gold datasets: **7**
+- Gold records: **11,400**
+- Verified Databricks Delta analytics tables: **5**
+
+These results describe the tested project run; a fresh setup should rerun the pipeline and tests to verify its own environment.
 
 ## Project Status
 
-**Implemented:** Core batch pipeline, Gold dimension and fact datasets, data-quality validations, and Databricks Delta analytics.
+**Implemented:** Core batch pipeline, Gold dimension and fact datasets, data-quality validations, automated tests, and Databricks Delta analytics.
 
-**Potential future enhancements:** Automated orchestration, streaming ingestion, and dashboard integration.
+**Potential future enhancements:**
+- Automated workflow orchestration.
+- Streaming data ingestion.
+- Business intelligence dashboard integration.
 
 ## Business Value
 
-SkyFlow demonstrates how airline operational data can be transformed into structured, validated datasets for revenue analysis, booking insights, payment analysis, and flight-performance monitoring.
+SkyFlow demonstrates how airline operational data can be transformed into structured, validated datasets for booking analysis, revenue insights, payment monitoring, route performance, and flight-performance analysis.
+
+## Author
+
+**Vaishnavi Mahajan**
+
+[GitHub](https://github.com/Vaishnavimahajan1211) · [LinkedIn](https://www.linkedin.com/in/vaishnavi-mahajan-4549203a2)
