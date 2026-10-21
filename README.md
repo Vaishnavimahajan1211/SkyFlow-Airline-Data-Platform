@@ -4,11 +4,12 @@ An end-to-end data engineering project that transforms airline operational data 
 
 ## Overview
 
-SkyFlow simulates a modern airline data platform that processes passenger, booking, flight, airport, aircraft, route, and payment data. The platform uses a layered data architecture to transform operational data into structured datasets for business analysis and operational reporting.
+SkyFlow simulates a modern airline data platform that processes passenger, booking, flight, airport, aircraft, route, and payment data. It uses a layered data architecture to transform operational data into structured datasets for business analysis and operational reporting.
 
 ## Architecture
 
 **MySQL → Python ETL → Bronze → Silver → Gold → Databricks → Delta Analytics Tables**
+
 ![SkyFlow Architecture](docs/screenshots/skyflow_architecture.png)
 
 ## Technology Stack
@@ -25,10 +26,13 @@ SkyFlow simulates a modern airline data platform that processes passenger, booki
 ## Key Features
 
 ### 1. End-to-End Data Pipeline
+
 - Airline-related relational data and Python-based data generation.
 - Bronze, Silver, and Gold data-processing layers.
 - PySpark transformations for dimension and fact datasets.
 - Analytics-ready datasets for downstream business analysis.
+
+![Pipeline Execution](docs/screenshots/skyflow_pipeline.png)
 
 ### 2. Gold Data Layer
 
@@ -55,6 +59,8 @@ Validation includes:
 - Booking amount and flight-delay business-rule checks.
 - CSV-based data-quality reporting.
 
+![Data Quality Report](docs/screenshots/skyflow_data_quality_report.png)
+
 ### 4. Databricks Analytics
 
 Five persisted Delta analytics tables have been created and verified:
@@ -66,6 +72,8 @@ Five persisted Delta analytics tables have been created and verified:
 - `workspace.default.skyflow_flight_performance`
 
 These tables support analysis of booking status, confirmed-booking revenue, payment amounts, route revenue, and flight performance.
+
+![Databricks Analytics](docs/screenshots/databricks_analytics.png)
 
 ## Repository Structure
 
@@ -101,7 +109,7 @@ SkyFlow-Airline-Data-Platform/
 - Python
 - MySQL and MySQL Workbench
 - Git
-- Databricks workspace for the analytics stage
+- A Databricks workspace for the analytics stage
 
 ### 1. Clone the Repository
 
@@ -130,11 +138,11 @@ After configuring MySQL and the required dependencies, run:
 python -m python.pipeline.master_pipeline
 ```
 
-The pipeline generates the project's data-layer outputs. Gold datasets and other generated outputs may need to be regenerated locally because generated data is excluded from Git tracking.
+The pipeline generates the project's data-layer outputs. Generated data may need to be recreated locally because some generated files are excluded from Git tracking.
 
 ### 5. Run Databricks Analytics
 
-Upload the generated Gold datasets to the Databricks workspace and run the project's analytics notebook or SQL workflow to create and verify the five Delta tables listed above.
+Upload the generated Gold datasets to your Databricks workspace and run the project's analytics notebook or SQL workflow to create and verify the five Delta tables listed above.
 
 ## Validation Results
 
@@ -147,7 +155,7 @@ Latest recorded validation results:
 - Gold records: **11,400**
 - Verified Databricks Delta analytics tables: **5**
 
-These results describe the tested project run; a fresh setup should rerun the pipeline and tests to verify its own environment.
+These results describe the tested project run. A fresh setup should rerun the pipeline and tests to verify its own environment.
 
 ## Project Status
 
@@ -166,4 +174,5 @@ SkyFlow demonstrates how airline operational data can be transformed into struct
 
 **Vaishnavi Mahajan**
 
-[GitHub](https://github.com/Vaishnavimahajan1211) · [LinkedIn](https://www.linkedin.com/in/vaishnavi-mahajan-4549203a2)
+- [GitHub](https://github.com/Vaishnavimahajan1211)
+- [LinkedIn](https://www.linkedin.com/in/vaishnavi-mahajan-4549203a2)
